@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { baseUrl } from '../config.json'
+
 
 function Department({ organizationId, departments, setDepartments, setSelectedDepartment, handleUpdateClick }) {
   const [newDepartmentName, setNewDepartmentName] = useState("");
@@ -16,7 +18,7 @@ function Department({ organizationId, departments, setDepartments, setSelectedDe
         throw new Error("Organization ID is required");
       }
       const response = await axios.post(
-        `http://localhost:5000/api/organization/${organizationId}/add-department`,
+        `${baseUrl}/organization/${organizationId}/add-department`,
         {
           name: newDepartmentName
         }

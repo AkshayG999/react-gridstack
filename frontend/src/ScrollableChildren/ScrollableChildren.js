@@ -5,6 +5,7 @@ import Employee from "./Employee";
 import Modal from "./Modal";
 import ReactSplit, { SplitDirection } from "@devbookhq/splitter";
 import axios from "axios";
+import { baseUrl } from '../config.json'
 
 function ScrollableChildren() {
   const [organizations, setOrganizations] = useState([]);
@@ -17,7 +18,7 @@ function ScrollableChildren() {
     async function fetchData() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/organization"
+          `${baseUrl}/organization`
         );
         setOrganizations(response.data);
       } catch (error) {
@@ -41,17 +42,17 @@ function ScrollableChildren() {
     try {
       if (modalData.type === 'organization') {
         await axios.put(
-          `http://localhost:5000/api/organization/update/${modalData.data._id}`,
+          `${baseUrl}/organization/update/${modalData.data._id}`,
           { name: modalData.data.name }
         );
       } else if (modalData.type === 'department') {
         await axios.put(
-          `http://localhost:5000/api/organization/${selectedOrganization._id}/update-department/${modalData.data._id}`,
+          `${baseUrl}/organization/${selectedOrganization._id}/update-department/${modalData.data._id}`,
           { name: modalData.data.name }
         );
       } else if (modalData.type === 'employee') {
         await axios.put(
-          `http://localhost:5000/api/organization/${selectedOrganization._id}/${selectedDepartment._id}/update-employee/${modalData.data._id}`,
+          `${baseUrl}/organization/${selectedOrganization._id}/${selectedDepartment._id}/update-employee/${modalData.data._id}`,
           { name: modalData.data.name, position: modalData.data.position }
         );
       }

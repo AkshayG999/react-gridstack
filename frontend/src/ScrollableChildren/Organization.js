@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./TileX.css";
+import { baseUrl } from '../config.json'
 
 function Organization({ organizations, setSelectedOrganization, setOrganizations, handleUpdateClick }) {
   const [orgName, setOrgName] = useState("");
@@ -10,7 +11,7 @@ function Organization({ organizations, setSelectedOrganization, setOrganizations
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/organization/add",
+        `${baseUrl}/organization/add`,
         { name: orgName }
       );
       setSelectedOrganization(response.data);

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { baseUrl } from '../config.json'
+
 
 function Employee({ organizationId, selectedDepartment, handleUpdateClick }) {
     const [newEmployeeName, setNewEmployeeName] = useState("");
@@ -19,7 +21,7 @@ function Employee({ organizationId, selectedDepartment, handleUpdateClick }) {
         try {
             if (selectedDepartment) {
                 const response = await axios.get(
-                    `http://localhost:5000/api/organization/${organizationId}/${selectedDepartment._id}/employees`
+                    `${baseUrl}/organization/${organizationId}/${selectedDepartment._id}/employees`
                 );
                 setEmployees(response.data);
             }
@@ -31,7 +33,7 @@ function Employee({ organizationId, selectedDepartment, handleUpdateClick }) {
     const handleAddEmployee = async () => {
         try {
             const response = await axios.post(
-                `http://localhost:5000/api/organization/${organizationId}/${selectedDepartment._id}/add-employee`,
+                `${baseUrl}/organization/${organizationId}/${selectedDepartment._id}/add-employee`,
                 {
                     name: newEmployeeName,
                     position: newEmployeePosition
